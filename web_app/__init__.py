@@ -7,11 +7,12 @@ from web_app.routes.home_routes import home_routes
 from web_app.routes.book_routes import book_routes
 
 DATABASE_URI = 'sqlite:///twitoff_development.db'
-
-#'sqlite:////Users/Username/Desktop/your-repo-name/web_app_99.db'
+SECRET_KEY = "super secret"
 
 def create_app():
     app = Flask(__name__)
+
+    app.config["SECRET_KEY"] = SECRET_KEY # enable flash messaging via sessions
 
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
