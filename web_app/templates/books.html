@@ -1,0 +1,10 @@
+
+    <h1>My Books Page</h1>
+
+    <p>{{ message }}</p>
+
+    <ul>
+        {% for book in books %}
+            <li>{{ book["title"] }}</li>
+        {% endfor %}
+    </ul>
