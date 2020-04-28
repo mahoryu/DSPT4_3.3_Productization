@@ -45,7 +45,7 @@ def twitoff_predict():
     tweets_b = user_b.tweets
     all_tweets = tweets_a + tweets_b
 
-    for tweet in tweets_a:
+    for tweet in all_tweets:
         # add embeddings and corresponding user name to the lists above
         tweet_embeddings.append(tweet.embedding)
         tweet_labels.append(tweet.user.screen_name)
@@ -58,9 +58,9 @@ def twitoff_predict():
     #
     # make and return prediction
     #
-    example_tweet_embedding = basilica_connection.embed_sentence(tweet_text, model="twitter"
+    example_tweet_embedding = basilica_connection.embed_sentence(tweet_text, model="twitter")
     result = classifier.predict([example_tweet_embedding])
-    
+
     return render_template("prediction_results.html",
                            screen_name_a=screen_name_a,
                            screen_name_b=screen_name_b,
