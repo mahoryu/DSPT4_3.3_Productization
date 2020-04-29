@@ -8,6 +8,11 @@ from web_app.services.basilica_service import connection as basilica_connection
 
 twitter_routes = Blueprint("twitter_routes", __name__)
 
+@twitter_routes.route("/users")
+def list_users():
+    name_records = User.query.all()
+    return render_template("users.html", screen_names=name_records)
+
 @twitter_routes.route("/users/<screen_name>/fetch")
 def fetch_user_data(screen_name):
     print("FETCHING...", screen_name)

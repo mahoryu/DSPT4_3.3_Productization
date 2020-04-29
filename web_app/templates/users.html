@@ -1,0 +1,26 @@
+<!-- web_app/templates/users.html -->
+
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "users" %}
+
+{% block title %}
+    <title>Add a User</title>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Here are the current users within the database.</h2>
+    <p>If the desired user in unavailable, please add add it using the form here<!--TODO-->.</p>
+
+{% if screen_names %}
+        <ul>
+        {% for name in screen_names %}
+            <li>{{ name.screen_name }}</li>
+        {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>Users not found.</p>
+    {% endif %}
+
+{% endblock %}
