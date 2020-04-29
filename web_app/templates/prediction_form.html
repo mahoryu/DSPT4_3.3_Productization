@@ -12,17 +12,17 @@
 
         <label>Twitter User A:</label>
         <select name="screen_name_a">
-            <option value="elonmusk" selected="true">@elonmusk</option>
-            <option value="justinbieber">@justinbieber</option>
-            <option value="s2t2">@s2t2</option>
+            {% for name in screen_names %}
+            <option value="{{ name.screen_name }}">@{{ name.screen_name }}</option>
+            {% endfor %}
         </select>
         <br>
 
         <label>Twitter User B:</label>
         <select name="screen_name_b">
-            <option value="elonmusk">@elonmusk</option>
-            <option value="justinbieber" selected="true">@justinbieber</option>
-            <option value="s2t2">@s2t2</option>
+            {% for name in screen_names %}
+            <option value="{{ name.screen_name }}">@{{ name.screen_name }}</option>
+            {% endfor %}
           </select>
         <br>
 

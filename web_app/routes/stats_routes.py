@@ -11,7 +11,6 @@ from web_app.services.basilica_service import connection as basilica_connection
 
 stats_routes = Blueprint("stats_routes", __name__)
 
-# TODO accept some inputs related to the iris training data (x values)
 @stats_routes.route('/stats/iris')
 def iris():
     X, y = load_iris(return_X_y=True)
@@ -20,8 +19,13 @@ def iris():
     result = str(clf.predict(X[:2, :]))
     return result #TODO: return as JSON
 
-@stats_routes.route('/stats/predict', methods=["POST"])
+@stats_routes.route('/stats/predict')
 def twitoff_predict():
+    name_records = User.query.all()
+    return render_template("prediction_form.html", screen_names=name_records)
+
+@stats_routes.route('/stats/predict', methods=["POST"])
+def twitoff_prediction():
     print("PREDICT ROUTE...")
     print("FORM DATA:", dict(request.form))
     # > {'screen_name_a': 'elonmusk', 'screen_name_b': 's2t2', 'tweet_text': 'Example tweet text here'}
@@ -29,8 +33,6 @@ def twitoff_predict():
     screen_name_b = request.form["screen_name_b"]
     tweet_text = request.form["tweet_text"]
     print(screen_name_a, screen_name_b, tweet_text)
-
-    #
 
     #
     # train a model
