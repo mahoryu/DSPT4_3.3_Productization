@@ -10,9 +10,9 @@
 {% block content %}
 
     <h2>Here are the current users within the database.</h2>
-    <p>If the desired user in unavailable, please add add it using the form here<!--TODO-->.</p>
+    <p>If the desired user is unavailable, please add add it using the form below.</p>
 
-{% if screen_names %}
+    {% if screen_names %}
         <ul>
         {% for name in screen_names %}
             <li>{{ name.screen_name }}</li>
@@ -22,5 +22,13 @@
     {% else %}
         <p>Users not found.</p>
     {% endif %}
+
+    <form action="/users" method="POST">
+
+        <label>Title:</label>
+        <input type="text" name="screen_name" placeholder="JimGaffigan" value="JimGaffigan">
+
+        <button>Submit</button>
+    </form>
 
 {% endblock %}

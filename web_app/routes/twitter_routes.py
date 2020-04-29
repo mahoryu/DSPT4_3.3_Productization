@@ -1,6 +1,7 @@
 # web_app/routes/twitter_routes.py
 
 from flask import Blueprint, jsonify, request, render_template, flash, redirect
+import tweepy
 
 from web_app.models import db, User, Tweet, parse_records
 from web_app.services.twitter_service import api as twitter_api
@@ -13,6 +14,11 @@ def list_users():
     name_records = User.query.all()
     return render_template("users.html", screen_names=name_records)
 
+@twitter_routes.route("/users", methods=["POST"])
+def add_user():
+    screen_name = request.form["screen_name"]
+    return redirect(f"users/{screen_name}/fetch")
+
 @twitter_routes.route("/users/<screen_name>/fetch")
 def fetch_user_data(screen_name):
     print("FETCHING...", screen_name)
@@ -20,8 +26,11 @@ def fetch_user_data(screen_name):
     #
     # fetch user info
     #
-    user = twitter_api.get_user(screen_name)
-
+    try:
+        user = twitter_api.get_user(screen_name)
+    except tweepy.error.TweepError:
+        flash(f"User '{screen_name}' does not exist!", "dark")
+        return redirect("/users")
     #
     # store user info in database
     #
@@ -66,5 +75,6 @@ def fetch_user_data(screen_name):
 
     db.session.commit()
 
-    return f"FETCHED {screen_name} OK"
+    flash(f"User '{screen_name}' added successfully!", "dark")
+    return redirect("/users")
     # return jsonify({"user": user._json, "num_tweets": len(statuses)})
