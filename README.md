@@ -8,6 +8,15 @@ TODO: instructions for git clone
 
 TODO: instructions for virtual environment
 
+Also setup a database (Linux/Mac):
+
+```shell script
+FLASK_APP=web_app flask db init
+FLASK_APP=web_app flask db migrate
+FLASK_APP=web_app flask db upgrade
+```
+(ignore ```shell script FLASK_APP=web_app``` on Windows)
+
 ## Usage
 
 ```shell script
