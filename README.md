@@ -17,6 +17,19 @@ FLASK_APP=web_app flask db upgrade
 ```
 (ignore ```shell script FLASK_APP=web_app``` on Windows)
 
+
+
+Set up API Keys:
+
+```shell script
+heroku config:set ALPHAVANTAGE_API_KEY="_____"
+heroku config:set BASILICA_API_KEY="_____"
+heroku config:set TWITTER_API_KEY="_____"
+heroku config:set TWITTER_API_SECRET="______"
+heroku config:set TWITTER_ACCESS_TOKEN="______"
+heroku config:set TWITTER_ACCESS_TOKEN_SECRET="_____"
+```
+
 ## Usage
 
 ```shell script
